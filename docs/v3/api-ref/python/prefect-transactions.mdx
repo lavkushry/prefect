@@ -70,30 +70,34 @@ auto() -> str
 Exposes `enum.auto()` to avoid requiring a second import to use `AutoEnum`
 
 
-### `CommitMode` <sup><a href="https://github.com/PrefectHQ/prefect/blob/main/src/prefect/transactions.py#L53" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
-
-**Methods:**
-
-#### `auto` <sup><a href="https://github.com/PrefectHQ/prefect/blob/main/src/prefect/utilities/collections.py#L71" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+### `CommitMode`
 
 ```python
-auto() -> str
+class CommitMode(AutoEnum):
+    EAGER = "EAGER"
+    LAZY = "LAZY"
+    OFF = "OFF"
 ```
 
-Exposes `enum.auto()` to avoid requiring a second import to use `AutoEnum`
+When a transaction commits relative to its children:
+
+- `EAGER` — commit as soon as work succeeds
+- `LAZY` — commit when the outermost transaction exits successfully
+- `OFF` — do not commit automatically
 
 
-### `TransactionState` <sup><a href="https://github.com/PrefectHQ/prefect/blob/main/src/prefect/transactions.py#L59" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
-
-**Methods:**
-
-#### `auto` <sup><a href="https://github.com/PrefectHQ/prefect/blob/main/src/prefect/utilities/collections.py#L71" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+### `TransactionState`
 
 ```python
-auto() -> str
+class TransactionState(AutoEnum):
+    PENDING = "PENDING"
+    ACTIVE = "ACTIVE"
+    STAGED = "STAGED"
+    COMMITTED = "COMMITTED"
+    ROLLED_BACK = "ROLLED_BACK"
 ```
 
-Exposes `enum.auto()` to avoid requiring a second import to use `AutoEnum`
+Lifecycle states for a transaction.
 
 
 ### `BaseTransaction` <sup><a href="https://github.com/PrefectHQ/prefect/blob/main/src/prefect/transactions.py#L67" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>

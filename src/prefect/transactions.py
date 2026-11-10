@@ -46,17 +46,40 @@ logger: logging.Logger = get_logger("transactions")
 
 
 class IsolationLevel(AutoEnum):
+    """Isolation level for transactional reads/writes.
+
+    Members are the supported isolation modes for Prefect transactions.
+    """
+
     READ_COMMITTED = AutoEnum.auto()
     SERIALIZABLE = AutoEnum.auto()
 
 
 class CommitMode(AutoEnum):
+    """When a transaction commits relative to its children.
+
+    Members:
+        EAGER: Commit as soon as work succeeds.
+        LAZY: Commit when the outermost transaction exits successfully.
+        OFF: Do not commit automatically.
+    """
+
     EAGER = AutoEnum.auto()
     LAZY = AutoEnum.auto()
     OFF = AutoEnum.auto()
 
 
 class TransactionState(AutoEnum):
+    """Lifecycle states for a transaction.
+
+    Members:
+        PENDING: Created but not started.
+        ACTIVE: Running.
+        STAGED: Ready to commit.
+        COMMITTED: Successfully committed.
+        ROLLED_BACK: Rolled back.
+    """
+
     PENDING = AutoEnum.auto()
     ACTIVE = AutoEnum.auto()
     STAGED = AutoEnum.auto()

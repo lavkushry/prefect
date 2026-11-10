@@ -53,6 +53,10 @@ class AutoEnum(str, Enum):
     In addition, because AutoEnums inherit from `str`, they are automatically
     JSON-serializable.
 
+    Subclasses declare members as class attributes (via `AutoEnum.auto()`). Those
+    members are the public API—for example `CommitMode.EAGER`—not the inherited
+    `auto()` helper.
+
     See https://docs.python.org/3/library/enum.html#using-automatic-values
 
     Example:
@@ -60,6 +64,8 @@ class AutoEnum(str, Enum):
         class MyEnum(AutoEnum):
             RED = AutoEnum.auto() # equivalent to RED = 'RED'
             BLUE = AutoEnum.auto() # equivalent to BLUE = 'BLUE'
+
+        assert MyEnum.RED == "RED"
         ```
     """
 
